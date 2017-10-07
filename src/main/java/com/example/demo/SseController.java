@@ -21,9 +21,12 @@ public class SseController {
 //        throw new RuntimeException("test");
 //    }
 
+    public volatile int callsNo = 0;
+
     @RequestMapping("/sse")
-    public SseEmitter sseEmitter() {
-        logger.info("/sse");
+    public SseEmitter sseEmitter(int callNo) {
+        logger.info("/sse/{}", callNo);
+        callsNo ++;
         SseEmitter emitter = new SseEmitter();
 
         new Thread(()->{
